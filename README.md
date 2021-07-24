@@ -8,7 +8,7 @@ at https://dev.theomader.com/gaussian-kernel-calculator/
 
 ### Bilinear version?  
 We can reduce size of a kernel by calculating two samples for the cost of one using bilinear filtering.  
-It works only for kernels with sizes of 5, 9, 13 ... or generally: (kernelSize - 1) % 4 == 0.  
+It works only for kernels with sizes of 5, 9, 13 ... or generally: N * 4 + 1 for N > 0.  
 Bilinear kernel size = (kernelSize + 1) / 2
 
 ### Example:  

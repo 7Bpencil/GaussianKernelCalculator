@@ -11,7 +11,7 @@ We can reduce size of a kernel by calculating two samples for the cost of one us
 It works only for kernels with sizes of 5, 9, 13 ... or generally: (kernelSize - 1) % 4 == 0.  
 Bilinear kernel size = (kernelSize + 1) / 2
 
-### Example, kernel size = 5, sigma = 1:  
+### Example:  
 ```
 using GKH = GaussianKernelsHelper;
 static void Main(string[] args)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.CompilerServices;
 
 namespace SevenBoldPencil.MathTools
@@ -8,6 +8,12 @@ namespace SevenBoldPencil.MathTools
         private struct Sample
         {
             public double X, Y;
+        }
+
+        public static void GetKernelBilinearSameSize(
+            double sigma, int kernelSize, out double[] weightsBilinear, out double[] samplePositionsBilinear, int sampleCount = 1000)
+        {
+            GetKernelBilinear(sigma, kernelSize * 2 - 1, out weightsBilinear, out samplePositionsBilinear, sampleCount);
         }
 
         public static void GetKernelBilinear(
@@ -44,6 +50,8 @@ namespace SevenBoldPencil.MathTools
             double sigma, int kernelSize, out double[] weights, out double[] samplePositions, int sampleCount = 1000)
         {
             // https://dev.theomader.com/gaussian-kernel-calculator/
+
+            if (kernelSize % 2 != 1) throw new ArgumentException("kernelSize % 2 != 1");
 
             Func<double, double> GD = x => GaussianDistribution(x, 0, sigma);
 

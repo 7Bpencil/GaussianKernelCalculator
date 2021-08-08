@@ -13,7 +13,7 @@ Bilinear kernel size = (kernelSize + 1) / 2
 
 ### Example:  
 ```
-using GKH = GaussianKernelsHelper;
+using GKH = SevenBoldPencil.MathTools.GaussianKernelsHelper;
 static void Main(string[] args)
 {
     var kernelSize = 5;
@@ -21,15 +21,19 @@ static void Main(string[] args)
 
     GKH.GetKernel(sigma, kernelSize, out var weights, out var samplePositions);
     GKH.GetKernelBilinear(sigma, kernelSize, out var weightsBilinear, out var samplePositionsBilinear);
+    GKH.GetKernelBilinearSameSize(sigma, kernelSize, out var weightsBilinearSS, out var samplePositionsBilinearSS);
 
-    Console.Write("original:\nweights: ");
+    PrintKernel("original", weights, samplePositions);
+    PrintKernel("\n\nbilinear", weightsBilinear, samplePositionsBilinear);
+    PrintKernel("\n\nbilinear same size", weightsBilinearSS, samplePositionsBilinearSS);
+}
+
+static void PrintKernel(string name, double[] weights, double[] samplePositions)
+{
+    Console.Write($"{name}:\nweights: ");
     foreach (var w in weights) Console.Write($"{Math.Round(w, 6)} ");
     Console.Write("\nsample positions: ");
     foreach (var p in samplePositions) Console.Write($"{Math.Round(p, 6)} ");
-    Console.Write("\n\nbilinear:\nweights: ");
-    foreach (var w in weightsBilinear) Console.Write($"{Math.Round(w, 6)} ");
-    Console.Write("\nsample positions: ");
-    foreach (var p in samplePositionsBilinear) Console.Write($"{Math.Round(p, 6)} ");
 }
 ```
 ### Output:  
@@ -41,4 +45,8 @@ sample positions: -2 -1 0 1 2
 bilinear:
 weights: 0.30613 0.38774 0.30613
 sample positions: -1.200436 0 1.200436
+
+bilinear same size:
+weights: 0.006206 0.30233 0.382928 0.30233 0.006206
+sample positions: -3.036935 -1.200436 0 1.200436 3.036935
 ```

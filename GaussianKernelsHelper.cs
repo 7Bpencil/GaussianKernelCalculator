@@ -110,7 +110,7 @@ namespace SevenBoldPencil.MathTools
 
             for (var s = 1; s < samples.Length - 1; ++s)
             {
-                var sampleWeight = s % 2 == 0 ? 2 : 4;
+                var sampleWeight = (s % 2 + 1) * 2;
                 result += sampleWeight * samples[s].Y;
             }
 
